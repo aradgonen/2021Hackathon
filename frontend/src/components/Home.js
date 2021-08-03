@@ -30,7 +30,7 @@ const Home = (props) => {
       border: '1px solid #dadde9',
     },
   }))(Tooltip);
-  
+
 
   //let courses = useSelector((state) => state.courses);
   const courses = [
@@ -67,7 +67,7 @@ const Home = (props) => {
     {
       title: "Network",
       child_subject: ["Basic Network", "L2", "L3", "L4", "L5 - Benny edition"]
-    },{
+    }, {
       title: "Excahnge",
       child_subject: ["Basic Exchange", "Nothing - as usual"]
     }
@@ -100,34 +100,34 @@ const Home = (props) => {
 
 
   const childSubjectToJSX = (childSubjects) => {
-    
+
   }
 
   const parentSubjectsCard = parentSubjects.map((subject) => {
     console.log(subject)
     return (
-     
+
       <Grid item xs={3}>
         <HtmlTooltip
-        title={
-          <React.Fragment>
-            <Typography color="inherit">Subtopics</Typography>
-            {subject.child_subject.map((child) => <div>{child}</div>)}
-          </React.Fragment>
-        }
-      >
-        <Card>
-          <CardContent>
-            <Typography variant="body2" component="p">
-              {subject.title}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Link to="/home">
-              <Button size="small">Go To Subjects</Button>
-            </Link>
-          </CardActions>
-        </Card>
+          title={
+            <React.Fragment>
+              <Typography color="inherit">Subtopics</Typography>
+              {subject.child_subject.map((child) => <div>{child}</div>)}
+            </React.Fragment>
+          }
+        >
+          <Card>
+            <CardContent>
+              <Typography variant="body2" component="p">
+                {subject.title}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Link to="/home">
+                <Button size="small">Go To Subjects</Button>
+              </Link>
+            </CardActions>
+          </Card>
         </HtmlTooltip>
       </Grid>
     )
@@ -153,8 +153,7 @@ const Home = (props) => {
         {parentSubjectsCard}
       </Grid>
     </div>
-
-
+    //<CoursesView courses={courses}/>
   );
 };
 
