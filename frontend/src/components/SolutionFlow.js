@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Card,Stepper,Step,StepLabel,StepContent,Typography,Button } from '@material-ui/core';
 import FontAwesomeIcon from 'react-fontawesome';
+import SolutionKnowledge from './SolutionKnowledge';
 
 function getSteps() {
   return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-function DetailedCourseCard() {
+function SolutionFlow() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -66,14 +67,7 @@ function DetailedCourseCard() {
   };
 
   return (
-    <div className={classes.root}>
-      <Card>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>Learn Storage</Paper>
-        </Grid>
-        <Grid item xs={12}>
-{/* The Steps */}
+      <div>
 <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
@@ -128,11 +122,8 @@ function DetailedCourseCard() {
           </Button>
         </Paper>
       )}
-        </Grid>
-      </Grid>
-      </Card>
-    </div>
+      </div>
   );
 
 }
-  export default DetailedCourseCard;
+  export default SolutionFlow;

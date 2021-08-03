@@ -5,7 +5,7 @@ import { ModalProvider } from './modal/modalContext';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
+import "font-awesome/css/font-awesome.min.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
@@ -13,6 +13,8 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
+import SolutionKnowledge from "./components/SolutionKnowledge";
+
 import DataService from "./services/data.service";
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
@@ -80,7 +82,11 @@ const App = () => {
                 Home
               </Link>
             </li>
-
+            <li className="nav-item">
+              <Link to={"/sk"} className="nav-link">
+                Solution Knowledge
+              </Link>
+            </li>
             {showModeratorBoard && (
               <li className="nav-item">
                 <Link to={"/mod"} className="nav-link">
@@ -138,6 +144,7 @@ const App = () => {
             <Route path="/user" component={BoardUser} />
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
+            <Route path="/sk" component={SolutionKnowledge} />
           </Switch>
 
         </div>
