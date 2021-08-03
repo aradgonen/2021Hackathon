@@ -24,6 +24,7 @@ import { history } from "./helpers/history";
 import m2e_logo from "./images/m2e_logo.png"
 import DetailedRackCard from './components/detailed_course_card'
 import AddDevicesToRack from './components/AddDevicesToRack'
+import Exam from "./components/Exam";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -68,13 +69,15 @@ const App = () => {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
-             M2E 
-            <img
+          <img
                         alt=""
                         src={m2e_logo}
                         width="30"
                         height="30"
+                        className="d-inline-block align-top"
                     />
+            M2E 
+
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -85,6 +88,11 @@ const App = () => {
             <li className="nav-item">
               <Link to={"/sk"} className="nav-link">
                 Solution Knowledge
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/exam"} className="nav-link">
+                Exam
               </Link>
             </li>
             {showModeratorBoard && (
@@ -145,6 +153,7 @@ const App = () => {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/sk" component={SolutionKnowledge} />
+            <Route path="/exam" component={Exam} />
           </Switch>
 
         </div>

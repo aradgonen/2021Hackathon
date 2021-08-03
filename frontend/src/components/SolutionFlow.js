@@ -7,123 +7,71 @@ import Grid from '@material-ui/core/Grid';
 import { Card,Stepper,Step,StepLabel,StepContent,Typography,Button } from '@material-ui/core';
 import FontAwesomeIcon from 'react-fontawesome';
 import SolutionKnowledge from './SolutionKnowledge';
-
-function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
-}
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
-    case 1:
-      return 'An ad group contains one or more ads which target a shared set of keywords.';
-    case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
-    default:
-      return 'Unknown step';
-  }
-}
+  
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(2),
-  },
-  resetContainer: {
-    padding: theme.spacing(3),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-}));
-function SolutionFlow() {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
-  return (
-      <div>
-<Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            <StepContent>
-            <Grid container spacing={3}>
-              <Grid item xs={6}> 
-              <Typography>{getStepContent(index)}</Typography>
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
-                </div>
+    root: {
+      width: '100%',
+    },
+    backButton: {
+      marginRight: theme.spacing(1),
+    },
+    instructions: {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+    },
+  }));
+function SolutionFlow(props) {
+    const classes = useStyles();
+    const [activeStep, setActiveStep] = React.useState(0);
+    const steps = props.rowData.solutionflow;
+  
+    const handleNext = () => {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+  
+    const handleBack = () => {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+  
+    const handleReset = () => {
+      setActiveStep(0);
+    };
+  
+    return (
+      <div className={classes.root}>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map(({title,data}) => (
+            <Step key={data}>
+              <StepLabel>{title}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        <div>
+          {activeStep === steps.length ? (
+            <div>
+              <Typography className={classes.instructions}>All steps completed</Typography>
+              <Button onClick={handleReset}>Reset</Button>
+            </div>
+          ) : (
+            <div>
+              <Typography className={classes.instructions}>{steps[activeStep].data}</Typography>
+              <div>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  Back
+                </Button>
+                <Button variant="contained" color="primary" onClick={handleNext}>
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
               </div>
-              </Grid>
-              <Grid item xs={6}>
-                <Grid container spacing={3}>
-                  <Grid item zeroMinWidth>
-                    <Typography>{label + " Materials"}</Typography>
-                  </Grid>
-                  <Grid container zeroMinWidth >
-                    {/* List the course files for this step */}
-                    <Paper elevation={3} mx="auto">PDF</Paper>
-                  </Grid>
-                </Grid>
-                
-              </Grid>
-              </Grid>
-            </StepContent>
-            
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} className={classes.button}>
-            Reset
-          </Button>
-        </Paper>
-      )}
+            </div>
+          )}
+        </div>
       </div>
-  );
+    );
 
 }
   export default SolutionFlow;
