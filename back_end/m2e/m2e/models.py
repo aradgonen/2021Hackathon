@@ -62,6 +62,7 @@ class Exam(models.Model):
 
 class Question(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE, related_name='questions')
+    right_answer = models.OneToOneField('Answer', on_delete=models.CASCADE, related_name="q", null=True)
     question = models.CharField(max_length=5000)
 
     # answer = models.ForeignKey(Answer, on_delete=models.CASCADE())
@@ -73,7 +74,6 @@ class Question(models.Model):
 class Answer(models.Model):
     answer = models.CharField(max_length=5000)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
-    q = models.OneToOneField(Question, on_delete=models.CASCADE, related_name='correct_answer')
 
     def __str__(self):
         return self.answer
