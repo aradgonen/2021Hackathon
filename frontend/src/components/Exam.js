@@ -44,7 +44,11 @@ function Exam(props) {
     const [activeStep, setActiveStep] = React.useState(0);
     const classes = useStyles();
     const [solution, setSolution] = React.useState(); 
-    const handleNext = (e) => {
+    const [score, setScore] = React.useState();
+    const handleNext = (e,questions) => {
+      if(e.target.innerHTML == "Finish"){
+        handleFinish(questions)
+      }
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
     const handleSelect = (e) => {
@@ -67,8 +71,7 @@ function Exam(props) {
           correctAnswers = correctAnswers + 1;
         }
       }
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
+      setScore((correctAnswers/questions.length)*100)
       console.log("You got ",correctAnswers, " from ",questions.length, " questions");
     }
     return (
@@ -81,10 +84,9 @@ function Exam(props) {
           ))}
         </Stepper>
         <div>
-          {activeStep === steps.length ? (
+                            {activeStep === steps.length ? (
             <div>
-              <Typography className={classes.instructions}>All steps completed</Typography>
-              <Button onClick={handleReset}>Reset</Button>
+              <Typography className={classes.instructions}>All steps completed - You got {score} Points</Typography>
             </div>
           ) : (
             <div>
@@ -97,14 +99,9 @@ function Exam(props) {
                 >
                   Back
                 </Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={activeStep === steps.length - 1 ? handleFinish(questions) : handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
+                <Button variant="contained" color="primary" onClick={(e) => handleNext(e,questions)}>
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
               </div>
             </div>
           )}
