@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User, Group
+from datetime import datetime
 
 
 # Create your models here.
@@ -19,6 +21,7 @@ class SolutionKnowledge(models.Model):
     symptoms = models.CharField(max_length=50000)
     cause = models.CharField(max_length=50000)
     solution = models.CharField(max_length=50000)
+    date = models.DateTimeField(default=datetime.now())
 
     def __str__(self):
         return self.title
@@ -27,6 +30,19 @@ class SolutionKnowledge(models.Model):
 class Course(models.Model):
     title = models.CharField(max_length=50)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='courses')
+    own_group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='courses', null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+
+class Progress(models.Model):
+    is_finished = models.BooleanField(default=False)
+    started_date = models.DateTimeField(default=datetime.now())
+    finished_date = models.DateTimeField(default=models.SET_NULL, null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='progresses')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='progresses')
+    current_step = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.title
