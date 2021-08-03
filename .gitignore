@@ -1,8 +1,10 @@
-env
+**/venv
 **/*.pyc
 **/__pycache__
 **/migrations
 db.sqlite3
-node_modules
-build
-package-lock.json
+
+back_end/db.sqlite3
+front_end/node_modules
+front_end/build
+
