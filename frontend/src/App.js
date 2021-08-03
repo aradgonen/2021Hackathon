@@ -27,6 +27,7 @@ import { clearMessage } from "./actions/message";
 import { setCourses } from "./actions/courses";
 import { setSearchTerm } from "./actions/search";
 import { history } from "./helpers/history";
+import SubjectLayout from "./components/Subjects/SubjectsLayout"
 import DetailedRackCard from './components/detailed_course_card'
 import AddDevicesToRack from './components/AddDevicesToRack'
 
@@ -102,10 +103,8 @@ const App = () => {
       <ModalProvider>
         <BrowserRouter>
           <div>
-
             <NavigationBar onThemeChange= {updateTheme} currTheme={currThemeType}/>
             <div className="container mt-3">
-
               <Switch>
                 <Route exact path={["/", "/home"]} component={Home} />
                 <Route exact path="/login" component={Login} />
