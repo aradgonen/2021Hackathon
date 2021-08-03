@@ -5,15 +5,16 @@ from django.db import models
 
 class Subject(models.Model):
     title = models.CharField(max_length=50)
-    parent_subject = models.ForeignKey('self', null=True, blank=True, related_name='children_subjects', on_delete=models.SET_NULL)
+    parent_subject = models.ForeignKey('self', null=True, blank=True, related_name='children_subjects',
+                                       on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title
 
 
-class SK(models.Model):
+class SolutionKnowledge(models.Model):
     title = models.CharField(max_length=50)
-    subject = models.ForeignKey(Subject, related_name='children_subjects', on_delete=models.SET_NULL)
+    subject = models.ForeignKey(Subject, related_name='sks', on_delete=models.CASCADE)
     problem = models.CharField(max_length=50000)
     symptoms = models.CharField(max_length=50000)
     cause = models.CharField(max_length=50000)
@@ -43,9 +44,9 @@ class Material(models.Model):
 class Step(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=50000)
-    index = models.IntegerField(max_length=50)
+    index = models.IntegerField()
     materials = models.ManyToManyField(Material, related_name='Steps')
-    course = models.ForeignKey(Course, related_name='Steps')
+    course = models.ForeignKey(Course, related_name='Steps', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title
