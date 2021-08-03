@@ -25,6 +25,7 @@ import m2e_logo from "./images/m2e_logo.png"
 import DetailedRackCard from './components/detailed_course_card'
 import AddDevicesToRack from './components/AddDevicesToRack'
 import Exam from "./components/Exam";
+import CreateSolution from "./components/CreateSolution";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -95,6 +96,11 @@ const App = () => {
                 Exam
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/create/solution"} className="nav-link">
+                Create Solution
+              </Link>
+            </li>
             {showModeratorBoard && (
               <li className="nav-item">
                 <Link to={"/mod"} className="nav-link">
@@ -154,6 +160,7 @@ const App = () => {
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/sk" component={SolutionKnowledge} />
             <Route path="/exam" component={Exam} />
+            <Route path="/create/solution" component={CreateSolution} />
           </Switch>
 
         </div>

@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Card,Stepper,Step,StepLabel,StepContent,Typography,Button } from '@material-ui/core';
 import FontAwesomeIcon from 'react-fontawesome';
+import {useHistory} from "react-router-dom";
 
 function getSteps() {
   return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
@@ -49,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function DetailedCourseCard() {
+  let _history = useHistory()
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -109,7 +111,7 @@ function DetailedCourseCard() {
                   </Grid>
                   <Grid container zeroMinWidth >
                     {/* List the course files for this step */}
-                    <Paper elevation={3} mx="auto">PDF</Paper>
+                    <Paper elevation={3} mx="auto" onClick={()=>handleFileClick("1.pdf")}>PDF</Paper>
                   </Grid>
                 </Grid>
                 
@@ -133,6 +135,8 @@ function DetailedCourseCard() {
       </Card>
     </div>
   );
-
+  function handleFileClick(file_id) {
+    _history.push(`/files/${file_id}`);
+  }
 }
   export default DetailedCourseCard;
