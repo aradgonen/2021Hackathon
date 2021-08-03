@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { Link } from "react-router-dom";
 
 
 
@@ -34,37 +35,93 @@ const Home = (props) => {
       own_group: "Network"
     }
   ]
+
+
+
+  // all subjects with no parents in the db
+  const parent_subjects = [
+    {
+      title: "storage",
+      child_subject: ["Basic Storage", "EMC Storage", "NetApp Storage"]
+    },
+    {
+      title: "Network",
+      child_subject: ["Basic Network", "L2", "L3", "L4", "L5 - Benny edition"]
+    },{
+      title: "Excahnge",
+      child_subject: ["Basic Exchange", "Nothing - as usual"]
+    }
+  ]
   //let searchTerm = useSelector((state) => state.search);
   //console.log(searchTerm);
 
-  const courses_card = courses.map((course) => {
+  const coursesCard = courses.map((course) => {
     console.log(course)
     return (
-      <Card>
-        <CardContent>
-          <Typography variant="body2" component="p">
-            {course.title}
-          </Typography>
-          <Typography variant="body2" component="p">
-            {course.own_group}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
+      <Grid item xs={3}>
+        <Card>
+          <CardContent>
+            <Typography variant="body2" component="p">
+              {course.title}
+            </Typography>
+            <Typography variant="body2" component="p">
+              {course.own_group}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Link to="/home">
+              <Button size="small">Go To Course</Button>
+            </Link>
+          </CardActions>
+        </Card>
+      </Grid>
+    )
+  })
+
+  const parentSubjectsCard = courses.map((course) => {
+    console.log(course)
+    return (
+      <Grid item xs={3}>
+        <Card>
+          <CardContent>
+            <Typography variant="body2" component="p">
+              {course.title}
+            </Typography>
+            <Typography variant="body2" component="p">
+              {course.own_group}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Link to="/home">
+              <Button size="small">Go To Course</Button>
+            </Link>
+          </CardActions>
+        </Card>
+      </Grid>
     )
   })
 
   return (
     // <CoursesView courses={courses}/>
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        {[courses_card]}
+    <div>
+      <Typography component="h2" variant="display4" gutterBottom>
+        Courses
+      </Typography>
+      <Grid container spacing={3}>
+        {coursesCard}
       </Grid>
-      <Grid item xs={12}>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Typography component="h2" variant="display4" gutterBottom>
+        Subjects
+      </Typography>
+      <Grid container spacing={3}>
+        {courses_card}
       </Grid>
-    </Grid>
+    </div>
+
 
   );
 };
