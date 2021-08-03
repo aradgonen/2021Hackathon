@@ -70,6 +70,27 @@ const SubjectPage = (props) => {
         subject: "6"
     }]
 
+    const courses = [{
+        title: "Networking",
+        subject: "10",
+        own_group: "network"
+    },
+    {
+        title: "L2 and other stuff",
+        subject: "6",
+        own_group: "network"
+    },
+    {
+        title: "Layer 3 and more fun",
+        subject: "7",
+        own_group: "network"
+    },
+    {
+        title: "Layer 2 is the best!",
+        subject: "6",
+        own_group: "network"
+    }]
+
     const getMaterial = (currentSubject) => {
         let addedMaterial = false
         const relevantMaterials = []
@@ -87,8 +108,28 @@ const SubjectPage = (props) => {
                 description: "",
                 subject: "0"
             }]
-        
-            return relevantMaterials
+
+        return relevantMaterials
+    }
+
+    const getCourses = (currentSubject) => {
+        let addedCourses = false
+        const relevantCourses = []
+        courses.forEach(course => {
+            if (course.subject === currentSubject.id) {
+                addedCourses = true
+                relevantCourses.push(course)
+            }
+        });
+
+        if (addedCourses === false)
+            return [{
+                title: "...",
+                subject: "0",
+                own_group: "0"
+            }]
+
+        return relevantCourses
     }
 
     const subjects = [
@@ -164,10 +205,16 @@ const SubjectPage = (props) => {
         description: "",
         subject: "0"
     }])
+    const [currentCourses, CoursesHandler] = useState([{
+        title: "...",
+        subject: "0",
+        own_group: "0"
+    }])
 
     const changeSelectedSubject = (currentSubject) => {
         selectedSubjectHandler(currentSubject)
         MaterialHandler(getMaterial(currentSubject))
+        CoursesHandler(getCourses(currentSubject))
     }
 
 
@@ -196,26 +243,52 @@ const SubjectPage = (props) => {
         const materialCards = currentMaterials.map(material => {
             return (
                 <Grid item xs={3}>
-                <Card>
-                    <CardContent>
-                        <Typography variant="body2" component="p">
-                            {material.title}
-                        </Typography>
-                        <Typography variant="body2" component="p">
-                            {material.description}
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Link to={material.file_path}>
-                            <Button size="small">Go To Material</Button>
-                        </Link>
-                    </CardActions>
-                </Card>
+                    <Card>
+                        <CardContent>
+                            <Typography variant="body2" component="p">
+                                {material.title}
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                                {material.description}
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Link to={material.file_path}>
+                                <Button size="small">Go To Material</Button>
+                            </Link>
+                        </CardActions>
+                    </Card>
                 </Grid>
             )
         })
 
         return materialCards
+    }
+
+    const courseToCards = () => {
+        const courseCards = currentCourses.map(course => {
+            return (
+                <Grid item xs={3}>
+                    <Card>
+                        <CardContent>
+                            <Typography variant="body2" component="p">
+                                {course.title}
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                                {course.own_group}
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Link to={"/"}>
+                                <Button size="small">Go To Course</Button>
+                            </Link>
+                        </CardActions>
+                    </Card>
+                </Grid>
+            )
+        })
+
+        return courseCards
     }
 
     return (
@@ -240,9 +313,10 @@ const SubjectPage = (props) => {
             <br></br>
             <br></br>
             <Typography component="h2" variant="display4" gutterBottom>
-                Subjects
+                Course
             </Typography>
             <Grid container spacing={3}>
+                {courseToCards()}
             </Grid>
         </div>
 
