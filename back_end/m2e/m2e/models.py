@@ -53,6 +53,7 @@ class Material(models.Model):
     title = models.CharField(max_length=50)
     file_path = models.CharField(max_length=250)
     description = models.CharField(max_length=5000)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='materials', null=True, blank=True) #
 
     def __str__(self):
         return self.title
