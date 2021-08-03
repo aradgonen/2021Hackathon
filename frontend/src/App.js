@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { ModalProvider } from './modal/modalContext';
+import UserPersonalPage from "./components/UI Components/userPage"
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -138,6 +139,7 @@ const App = () => {
             <Route path="/user" component={BoardUser} />
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
+            <Route path="/personal" component={UserPersonalPage}/>
           </Switch>
 
         </div>
