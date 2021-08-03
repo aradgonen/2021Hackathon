@@ -8,3 +8,4 @@ back_end/db.sqlite3
 front_end/node_modules
 front_end/build
 
+node_modules
