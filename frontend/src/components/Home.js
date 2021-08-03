@@ -8,10 +8,30 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { Link } from "react-router-dom";
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+
+import IconButton from '@material-ui/core/IconButton';
+import clsx from 'clsx';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
 
 
 
 const Home = (props) => {
+
+  const HtmlTooltip = withStyles((theme) => ({
+    tooltip: {
+      backgroundColor: '#f5f5f9',
+      color: 'rgba(0, 0, 0, 0.87)',
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(12),
+      border: '1px solid #dadde9',
+    },
+  }))(Tooltip);
+  
+
   //let courses = useSelector((state) => state.courses);
   const courses = [
     {
@@ -39,7 +59,7 @@ const Home = (props) => {
 
 
   // all subjects with no parents in the db
-  const parent_subjects = [
+  const parentSubjects = [
     {
       title: "storage",
       child_subject: ["Basic Storage", "EMC Storage", "NetApp Storage"]
@@ -78,25 +98,37 @@ const Home = (props) => {
     )
   })
 
-  const parentSubjectsCard = courses.map((course) => {
-    console.log(course)
+
+  const childSubjectToJSX = (childSubjects) => {
+    
+  }
+
+  const parentSubjectsCard = parentSubjects.map((subject) => {
+    console.log(subject)
     return (
+     
       <Grid item xs={3}>
+        <HtmlTooltip
+        title={
+          <React.Fragment>
+            <Typography color="inherit">Subtopics</Typography>
+            {subject.child_subject.map((child) => <div>{child}</div>)}
+          </React.Fragment>
+        }
+      >
         <Card>
           <CardContent>
             <Typography variant="body2" component="p">
-              {course.title}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {course.own_group}
+              {subject.title}
             </Typography>
           </CardContent>
           <CardActions>
             <Link to="/home">
-              <Button size="small">Go To Course</Button>
+              <Button size="small">Go To Subjects</Button>
             </Link>
           </CardActions>
         </Card>
+        </HtmlTooltip>
       </Grid>
     )
   })
@@ -118,7 +150,7 @@ const Home = (props) => {
         Subjects
       </Typography>
       <Grid container spacing={3}>
-        {courses_card}
+        {parentSubjectsCard}
       </Grid>
     </div>
 

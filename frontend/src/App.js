@@ -13,6 +13,7 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
+import SubjectPage from "./components/SubjectPage";
 import DataService from "./services/data.service";
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
@@ -22,6 +23,7 @@ import { history } from "./helpers/history";
 import m2e_logo from "./images/m2e_logo.png"
 import DetailedRackCard from './components/detailed_course_card'
 import AddDevicesToRack from './components/AddDevicesToRack'
+import { Subject } from "@material-ui/icons";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -138,6 +140,7 @@ const App = () => {
             <Route path="/user" component={BoardUser} />
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
+            <Route path="/subject" component={SubjectPage} />
           </Switch>
 
         </div>
