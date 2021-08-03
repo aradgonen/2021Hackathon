@@ -22,6 +22,7 @@ class SolutionKnowledge(models.Model):
     cause = models.CharField(max_length=50000)
     solution = models.CharField(max_length=50000)
     date = models.DateTimeField(default=datetime.now())
+    user = models.ForeignKey(User,  related_name='sks', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.title
