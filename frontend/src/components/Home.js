@@ -8,8 +8,7 @@ const Home = (props) => {
   console.log(searchTerm);
   
   return (
-      // <CoursesView courses={courses}/>
-      <div></div>
+      <CoursesView courses={courses}/>
   );
 };
 

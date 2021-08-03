@@ -13,7 +13,7 @@ import {
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
+import "font-awesome/css/font-awesome.min.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
@@ -21,15 +21,18 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
+import SolutionKnowledge from "./components/SolutionKnowledge";
+
 import DataService from "./services/data.service";
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { setCourses } from "./actions/courses";
 import { setSearchTerm } from "./actions/search";
 import { history } from "./helpers/history";
-import SubjectLayout from "./components/Subjects/SubjectsLayout"
 import DetailedRackCard from './components/detailed_course_card'
 import AddDevicesToRack from './components/AddDevicesToRack'
+import Exam from "./components/Exam";
+import CreateSolution from "./components/CreateSolution";
 
 import NavigationBar from './components/NavigationBar'
 import lightTheme from './utils/ui/themes/LightTheme';
@@ -113,8 +116,10 @@ const App = () => {
                 <Route path="/user" component={BoardUser} />
                 <Route path="/mod" component={BoardModerator} />
                 <Route path="/admin" component={BoardAdmin} />
+                <Route path="/sk" component={SolutionKnowledge} />
+                <Route path="/exam" component={Exam} />
+                <Route path="/create/solution" component={CreateSolution} />
               </Switch>
-
             </div>
           </div>
         </BrowserRouter>
