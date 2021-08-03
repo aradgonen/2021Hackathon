@@ -3,6 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { ModalProvider } from './modal/modalContext';
 
+import {
+  ThemeProvider,
+} from '@material-ui/styles'
+
+import {
+  createMuiTheme
+} from '@material-ui/core/styles'
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -19,16 +27,24 @@ import { clearMessage } from "./actions/message";
 import { setCourses } from "./actions/courses";
 import { setSearchTerm } from "./actions/search";
 import { history } from "./helpers/history";
-import m2e_logo from "./images/m2e_logo.png"
+import SubjectLayout from "./components/Subjects/SubjectsLayout"
 import DetailedRackCard from './components/detailed_course_card'
 import AddDevicesToRack from './components/AddDevicesToRack'
+
+import NavigationBar from './components/NavigationBar'
+import lightTheme from './utils/ui/themes/LightTheme';
+import darkTheme from './utils/ui/themes/DarkTheme';
+import pinkTheme from './utils/ui/themes/PinkTheme';
+import staticTheme from './utils/ui/themes/StaticTheme'
+import { light } from "@material-ui/core/styles/createPalette";
+import { pink } from "@material-ui/core/colors";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [currThemeType, updateTheme] = useState("dark")
 
   const { user: currentUser } = useSelector((state) => state.auth);
-  const courses = useSelector((state) => state.courses);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,105 +62,64 @@ const App = () => {
 
   useEffect(() => {
     DataService.getDevices().then(
-      (devicesResponse) =>{
+      (devicesResponse) => {
         DataService.getRacks().then(
-          (racksResponse) =>{
-            dispatch(setCourses(DataService.getCourses(racksResponse,devicesResponse)));
+          (racksResponse) => {
+            dispatch(setCourses(DataService.getCourses(racksResponse, devicesResponse)));
           }
         )
       }
     )
-}, [dispatch]);
+  }, [dispatch]);
+  
   const logOut = () => {
     dispatch(logout());
   };
 
+  let colorTheme = undefined
+
+  switch (currThemeType) {
+    case "dark":
+      colorTheme = darkTheme
+      break
+    case "light":
+      colorTheme = lightTheme
+      break
+    case "pink":
+      colorTheme = pinkTheme
+      break
+    default:
+      colorTheme = darkTheme
+  }
+
+  const theme = createMuiTheme(colorTheme, staticTheme, {
+    palette: {
+      type: currThemeType
+    },
+  });
+
   return (
-    <div>
-    <ModalProvider>
-    <BrowserRouter>
-      <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/"} className="navbar-brand">
-             M2E 
-            <img
-                        alt=""
-                        src={m2e_logo}
-                        width="30"
-                        height="30"
-                    />
-          </Link>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
-              </Link>
-            </li>
+    <ThemeProvider theme={theme}>
+      <ModalProvider>
+        <BrowserRouter>
+          <div>
+            <NavigationBar onThemeChange= {updateTheme} currTheme={currThemeType}/>
+            <div className="container mt-3">
+              <Switch>
+                <Route exact path={["/", "/home"]} component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/profile" component={Profile} />
+                <Route path="/user" component={BoardUser} />
+                <Route path="/mod" component={BoardModerator} />
+                <Route path="/admin" component={BoardAdmin} />
+              </Switch>
 
-            {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
-
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
+            </div>
           </div>
-
-          {currentUser ? (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
-                  {currentUser.username}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={logOut}>
-                  LogOut
-                </a>
-              </li>
-            </div>
-          ) : (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
-                  Login
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
-            </div>
-          )}
-        </nav>
-
-        <div className="container mt-3">
-
-          <Switch>
-            <Route exact path={["/", "/home"]} component={Home}/>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
-            <Route path="/user" component={BoardUser} />
-            <Route path="/mod" component={BoardModerator} />
-            <Route path="/admin" component={BoardAdmin} />
-          </Switch>
-
-        </div>
-      </div>
-    </BrowserRouter>
-    </ModalProvider>
-    </div>
+        </BrowserRouter>
+      </ModalProvider>
+    </ThemeProvider>
   );
 };
 
