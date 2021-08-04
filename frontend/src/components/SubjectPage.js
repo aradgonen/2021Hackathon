@@ -283,7 +283,7 @@ const SubjectPage = (props) => {
                         </CardContent>
                         <CardActions>
                             <dev to={material.file_path}>
-                                <a href="https://standards.incits.org/apps/group_public/download.php/81969/T11-2016-291v0.pdf" download>Go To Material</a>
+                                <a target="_blank" href="https://standards.incits.org/apps/group_public/download.php/81969/T11-2016-291v0.pdf" download>Go To Material</a>
                             </dev>
                         </CardActions>
                     </Card>

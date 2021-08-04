@@ -172,7 +172,7 @@ function DetailedCourseCard() {
     </div>
   );
   function handleFileClick(file_id) {
-    window.location.replace("https://www.soundczech.cz/temp/lorem-ipsum.pdf");
+    window.open("https://www.soundczech.cz/temp/lorem-ipsum.pdf");
   }
     function handleExamClick(exam_id) {
     _history.push(`/exam/${exam_id}`);
