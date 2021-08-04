@@ -144,8 +144,8 @@ function Exam(props) {
           correctAnswers = correctAnswers + 1;
         }
       }
-      setScore((correctAnswers/questions.length)*100)
-      console.log("You got ",correctAnswers, " from ",questions.length, " questions");
+      setScore((correctAnswers/(questions.length/4))*100)
+      console.log("You got ",correctAnswers, " from ",(questions.length)/4, " questions");
     }
     return (
       <div className={classes.root}>
@@ -157,7 +157,7 @@ function Exam(props) {
           ))}
         </Stepper>
         <div>
-                            {activeStep === steps.length ? (
+                            {activeStep === steps[1].length ? (
             <div>
               <Typography className={classes.instructions}>All steps completed - You got {score} Points</Typography>
             </div>
@@ -173,7 +173,7 @@ function Exam(props) {
                   Back
                 </Button>
                 <Button variant="contained" color="primary" onClick={(e) => handleNext(e,questions)}>
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  {activeStep === steps[1].length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
             </div>
