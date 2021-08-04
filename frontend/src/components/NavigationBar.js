@@ -61,7 +61,7 @@ const NavigationBar = (props) => {
     const classes = useStyles();
    
     return <div>
-        <AppBar position="sticky" color="default" >
+        <AppBar position="sticky" >
             <Toolbar className={classes.root}>
                 <NavLink to="/"
                     className={classes.link}>
@@ -96,6 +96,11 @@ const NavigationBar = (props) => {
                     className={classes.link}
                     activeClassName={classes.activeLink}>
                     Create Solution
+                </NavLink>
+                <NavLink to="/course/detail"
+                    className={classes.link}
+                    activeClassName={classes.activeLink}>
+                    Course Detail
                 </NavLink>
                 <div className={classes.mavbarFooter}>
                     <FormControl className={classes.formControl}>

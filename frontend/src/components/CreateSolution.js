@@ -8,6 +8,7 @@ import { Card,Stepper,Step,StepLabel,StepContent,Typography,Button,TextField } f
 import FontAwesomeIcon from 'react-fontawesome';
 import SolutionKnowledge from './SolutionKnowledge';
 import DynamicForm from './DynamicForm';
+import DataService from '../services/data.service';
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
@@ -61,6 +62,7 @@ function CreateSolution(props) {
     };
     const handleFinish = () => {
       console.log(solution);
+      DataService.setSk(solution);
     }
     return (
       <div className={classes.root}>

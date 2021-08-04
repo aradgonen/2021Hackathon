@@ -72,7 +72,7 @@ class Step(models.Model):
 
 class Exam(models.Model):
     title = models.CharField(max_length=50)
-    step = models.OneToOneField(Step, on_delete=models.CASCADE, related_name='exam')
+    step = models.OneToOneField(Step, on_delete=models.CASCADE, related_name='exam', null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -80,7 +80,7 @@ class Exam(models.Model):
 
 class Question(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE, related_name='questions')
-    right_answer = models.OneToOneField('Answer', on_delete=models.CASCADE, related_name="q", null=True)
+    right_answer = models.OneToOneField('Answer', on_delete=models.CASCADE, related_name="q",  null=True, blank=True)
     question = models.CharField(max_length=5000)
 
     # answer = models.ForeignKey(Answer, on_delete=models.CASCADE())
