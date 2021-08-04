@@ -147,7 +147,7 @@ function DetailedCourseCard() {
                   </Grid>
                   <Grid container zeroMinWidth >
                     {/* List the course files for this step */}
-                    <Paper elevation={3} mx="auto" onClick={()=>handleFileClick("1.pdf")}>PDF</Paper>
+                    <Paper elevation={3} mx="auto" onClick={()=>handleFileClick("https://www.soundczech.cz/temp/lorem-ipsum.pdf")}>PDF</Paper>
                   </Grid>
                 </Grid>
                 
@@ -172,7 +172,7 @@ function DetailedCourseCard() {
     </div>
   );
   function handleFileClick(file_id) {
-    _history.push(`/files/${file_id}`);
+    window.location.replace("https://www.soundczech.cz/temp/lorem-ipsum.pdf");
   }
     function handleExamClick(exam_id) {
     _history.push(`/exam/${exam_id}`);
