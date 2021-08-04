@@ -8,5 +8,3 @@ db.sqlite3
 back_end/db.sqlite3
 **/node_modules
 **/build
-
-node_modules

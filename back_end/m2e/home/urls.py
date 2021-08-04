@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/', include('m2e.urls')),
     path('api-auth/', include('rest_auth.urls')),
     path('admin/', admin.site.urls),
+    path('solution_knowledge/', include('m2e.solution_knowledge.urls'))
 ]

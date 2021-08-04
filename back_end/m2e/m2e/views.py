@@ -7,10 +7,15 @@ from rest_framework.permissions import (
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.forms.models import model_to_dict
-
+from rest_framework.generics import ListAPIView, CreateAPIView
 from .models import Subject
 from .serializers import SubjectSerializer
-
+from .models import SolutionKnowledge
+from .serializers import SolutionKnowledgeSerializer
+from rest_framework.status import (
+    HTTP_201_CREATED,
+    HTTP_400_BAD_REQUEST
+)
 
 def get_tree(category):
     tree = model_to_dict(category, fields=['category_name', 'status', 'id'])
@@ -80,3 +85,27 @@ class ExampleView(APIView):
             'status': 'request was permitted'
         }
         return Response(content)
+
+class SolutionKnowledgeListView(ListAPIView):
+    serializer_class = SolutionKnowledgeSerializer
+
+    def get_queryset(self):
+        queryset = SolutionKnowledge.objects.all()
+        username = self.request.query_params.get('username', None)
+        if username is not None:
+            queryset = queryset.filter(student__username=username)
+        return queryset
+
+
+class SolutionKnowledgeCreateView(CreateAPIView):
+    serializer_class = SolutionKnowledgeSerializer
+    queryset = SolutionKnowledge.objects.all()
+
+    def post(self, request):
+        print(request.data)
+        serializer = SolutionKnowledgeSerializer(data=request.data)
+        serializer.is_valid()
+        graded_assignment = serializer.create(request)
+        if graded_assignment:
+            return Response(status=HTTP_201_CREATED)
+        return Response(status=HTTP_400_BAD_REQUEST)
