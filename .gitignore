@@ -2,10 +2,11 @@
 **/*.pyc
 **/__pycache__
 **/migrations
+**/*.idea
 db.sqlite3
 
 back_end/db.sqlite3
-front_end/node_modules
-front_end/build
+**/node_modules
+**/build
 
 node_modules
