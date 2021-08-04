@@ -29,7 +29,9 @@ import DataService from "./services/data.service";
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { setCourses } from "./actions/courses";
+import { setSks } from "./actions/sk"
 import { setSearchTerm } from "./actions/search";
+import { setSubjects } from "./actions/subject";
 import { history } from "./helpers/history";
 import DetailedRackCard from './components/detailed_course_card'
 import AddDevicesToRack from './components/AddDevicesToRack'
@@ -45,6 +47,7 @@ import staticTheme from './utils/ui/themes/StaticTheme'
 import { light } from "@material-ui/core/styles/createPalette";
 import { pink } from "@material-ui/core/colors";
 import CoursesView from "./components/courses_view";
+import { setSk } from "./actions/sk";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -68,16 +71,28 @@ const App = () => {
   }, [currentUser]);
 
   useEffect(() => {
-    DataService.getDevices().then(
-      (devicesResponse) => {
-        DataService.getRacks().then(
-          (racksResponse) => {
-            dispatch(setCourses(DataService.getCourses(racksResponse, devicesResponse)));
-          }
-        )
+    DataService.getCourses().then(
+      (courseResponse) =>{
+        dispatch(setCourses(courseResponse));
       }
     )
-  }, [dispatch]);
+  })
+
+  useEffect(()=>{
+    DataService.getSk().then(
+      (skResponse) =>{
+        dispatch(setSks(skResponse));
+      }
+    )
+  })
+
+  useEffect(()=>{
+    DataService.getSubjects().then(
+      (subjectsResponse) =>{
+        dispatch(setSubjects(subjectsResponse));
+      }
+    )
+  })
   
   const logOut = () => {
     dispatch(logout());

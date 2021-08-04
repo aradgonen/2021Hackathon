@@ -8,3 +8,7 @@ export const SET_MESSAGE = "SET_MESSAGE";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 export const SET_COURSES = "SET_COURSES";
 export const SET_SEARCH = "SET_SEARCH";
+export const SET_SK = "SET_SK";
+export const SET_SUBJECT = "SET_SUBJECT";
+
+
