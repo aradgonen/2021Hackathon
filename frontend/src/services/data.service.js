@@ -14,10 +14,13 @@ const getCourses = () => {
   return axios.get(API_URL + "courses/", { headers:{'Access-Control-Allow-Origin': '*'}}); 
 };
 
-
+const setSk = (data) => {
+  return axios.post(API_URL + "solution-knowledge/", data)
+}
 
 export default {
   getCourses,
   getSk,
   getSubjects,
+  setSk,
 };
