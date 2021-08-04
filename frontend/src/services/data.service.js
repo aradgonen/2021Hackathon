@@ -1,6 +1,13 @@
 import axios from "axios";
 
 const API_URL = "/api/";
+const config = {}
+if(localStorage.getItem("user")){
+  config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem("user").key}` }
+};
+}
+
 
 const getSk = () => {
   return axios.get(API_URL + "solution-knowledge/", { headers:{'Access-Control-Allow-Origin': '*'}});
@@ -15,7 +22,7 @@ const getCourses = () => {
 };
 
 const setSk = (data) => {
-  return axios.post(API_URL + "solution-knowledge/", data)
+  return axios.post(API_URL + "solution-knowledge/", data,config)
 }
 
 export default {
