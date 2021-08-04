@@ -134,6 +134,7 @@ const App = () => {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/profile" component={Profile} />
                 <Route path="/user" component={BoardUser} />
+                <Route path="/subjects" component={SubjectPage} />
                 <Route path="/mod" component={BoardModerator} />
                 <Route path="/admin" component={BoardAdmin} />
                 <Route path="/sk" component={SolutionKnowledge} />
