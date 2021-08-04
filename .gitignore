@@ -10,3 +10,4 @@ back_end/db.sqlite3
 **/build
 
 node_modules
+package-lock.json
