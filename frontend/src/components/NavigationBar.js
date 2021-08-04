@@ -97,16 +97,20 @@ const NavigationBar = (props) => {
                     activeClassName={classes.activeLink}>
                     Create Solution
                 </NavLink>
-                <NavLink to="/course/detail"
+                {/* <NavLink to="/course/detail"
                     className={classes.link}
                     activeClassName={classes.activeLink}>
                     Course Detail
+<<<<<<< HEAD
                 </NavLink>
                 <NavLink to="/personal"
                     className={classes.link}
                     activeClassName={classes.activeLink}>
                     Personal
                 </NavLink>
+=======
+                </NavLink> */}
+>>>>>>> 6563c7fa409552867bb02d88e4dab6c50705d6c0
                 <div className={classes.mavbarFooter}>
                     <FormControl className={classes.formControl}>
                         <Select

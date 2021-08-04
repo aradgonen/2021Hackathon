@@ -38,25 +38,25 @@ const Home = (props) => {
       title: "Basic Storage",
       subject: "BasicStorage",
       own_group: "Storage",
-      coursePath:"/"
+      coursePath:"/course/detail/1"
     },
     {
       title: "EMC Storage Solutions",
       subject: "EMC",
       own_group: "Storage",
-      coursePath:"/"
+      coursePath:"/course/detail/2"
     },
     {
       title: "NetApp Storage Solutions",
       subject: "NetApp",
       own_group: "Storage",
-      coursePath:"/"
+      coursePath:"/course/detail/4"
     },
     {
       title: "Basic Networking",
       subject: "BasicNetworking",
       own_group: "Network",
-      coursePath:"/"
+      coursePath:"/course/detail/5"
     }
   ]
 
@@ -95,7 +95,7 @@ const Home = (props) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to="/home">
+            <Link to={course.coursePath}>
               <Button size="small">Go To Course</Button>
             </Link>
           </CardActions>

@@ -5,7 +5,7 @@ import DetailedCourseCard from './detailed_course_card';
 
 function CoursesView(props) {
   return(
-      <DetailedCourseCard></DetailedCourseCard>
+      <DetailedCourseCard courseId={props.courseId}></DetailedCourseCard>
     )
 }
   export default CoursesView;

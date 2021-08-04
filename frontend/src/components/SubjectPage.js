@@ -45,30 +45,50 @@ const SubjectPage = (props) => {
 
     // all subjects with no parents in the db
 
-    const materials = [{
-        title: "Networking",
-        file_path: "/benny/is/the/networking/god.pdf",
-        description: "Benny is the networking god - and that is in fact - true!",
-        subject: "10"
-    },
-    {
-        title: "L2 and other stuff",
-        file_path: "/benny/is/the/networking/god.pdf",
-        description: "L3 and other stuff",
-        subject: "6"
-    },
-    {
-        title: "Layer 3 and more fun",
-        file_path: "/benny/is/the/networking/god.pdf",
-        description: "Layer 2 and more fun",
-        subject: "7"
-    },
-    {
-        title: "Layer 2 is the best!",
-        file_path: "/benny/is/the/networking/god.pdf",
-        description: "Benny is the networking god - and that is in fact - true!",
-        subject: "6"
-    }]
+    const materials = [
+        {
+            title: "Networking",
+            file_path: "/Networking.pdf",
+            description: "Networking",
+            subject: "10"
+        },
+        {
+            title: "L2 Deep Dive",
+            file_path: "/Networking.pdf",
+            description: "Know L2",
+            subject: "6"
+        },
+        {
+            title: "Layer 2 Brief",
+            file_path: "/Networking.pdf",
+            description: "Overview of L2",
+            subject: "7"
+        },
+        {
+            title: "Layer 2 intoroduction",
+            file_path: "/Networking.pdf",
+            description: "Layer 2 intoroduction",
+            subject: "6"
+        },
+        {
+            title: "Networking Basics",
+            file_path: "/Networking.pdf",
+            description: "Networking Basics",
+            subject: "4"
+        },
+        {
+            title: "OSI",
+            file_path: "/Networking.pdf",
+            description: "OSI Model",
+            subject: "6"
+        },
+        {
+            title: "Networks",
+            file_path: "/Networking.pdf",
+            description: "What is a network",
+            subject: "7"
+        },
+    ]
 
     const courses = [{
         title: "Networking",
@@ -89,7 +109,8 @@ const SubjectPage = (props) => {
         title: "Layer 2 is the best!",
         subject: "6",
         own_group: "network"
-    }]
+    }
+    ]
 
     const getMaterial = (currentSubject) => {
         let addedMaterial = false
@@ -103,10 +124,10 @@ const SubjectPage = (props) => {
 
         if (addedMaterial === false)
             return [{
-                title: "...",
+                title: "Name",
                 file_path: "",
                 description: "",
-                subject: "0"
+                subject: "Subject"
             }]
 
         return relevantMaterials
@@ -124,8 +145,8 @@ const SubjectPage = (props) => {
 
         if (addedCourses === false)
             return [{
-                title: "...",
-                subject: "0",
+                title: "Name",
+                subject: "Subject",
                 own_group: "0"
             }]
 
@@ -150,7 +171,7 @@ const SubjectPage = (props) => {
                     id: "14",
                     title: "NetApp Virtual Servers",
                     children: []
-                },{
+                }, {
                     id: "15",
                     title: "NetApp Ontapp Management",
                     children: []
@@ -208,15 +229,15 @@ const SubjectPage = (props) => {
 
     const [selectedSubject, selectedSubjectHandler] = useState({ id: 0, title: "Subject", children: [] })
     const [currentMaterials, MaterialHandler] = useState([{
-        title: "...",
+        title: "Name",
         file_path: "",
         description: "",
-        subject: "0"
+        subject: "Subject"
     }])
     const [currentCourses, CoursesHandler] = useState([{
-        title: "...",
-        subject: "0",
-        own_group: "0"
+        title: "Name",
+        subject: "Subject",
+        own_group: "Owner Group"
     }])
 
     const changeSelectedSubject = (currentSubject) => {
@@ -300,10 +321,10 @@ const SubjectPage = (props) => {
     }
 
     let subjectIndexToShow = 1
-    if(window.location.href.indexOf("2") !== -1) {
+    if (window.location.href.indexOf("2") !== -1) {
         subjectIndexToShow = 0
     }
-    if(window.location.href.indexOf("4") !== -1) {
+    if (window.location.href.indexOf("4") !== -1) {
         subjectIndexToShow = 2
     }
 
@@ -316,6 +337,8 @@ const SubjectPage = (props) => {
                 defaultExpandIcon={<ChevronRightIcon />}
                 multiSelect
             >{subjectsToTree(subjects[subjectIndexToShow])}</TreeView>
+            <br></br>
+            <br></br>
             <Typography component="h2" variant="display4" gutterBottom>
                 {selectedSubject.title}
             </Typography>

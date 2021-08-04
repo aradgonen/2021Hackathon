@@ -25,23 +25,96 @@ function handleSubmit(e){
   e.preventDefaults()
 }
 
-function getFormByStep(step,label,handleSelect){
+function getFormByStep(step,label,handleSelect,subjectIndexToShow){
 
-  switch(step){
-    case 0:
-      return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"HDD",type:"Text",isCorrect:false},{label:"CD",type:"Text",isCorrect:false},{label:"SSD",type:"Text",isCorrect:true},{label:"Tape",type:"Text",isCorrect:false}]}}/>);
-    case 1:
-      return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"Yes",type:"Text",isCorrect:true},{label:"No",type:"Text",isCorrect:false},{label:"Maybe",type:"Text",isCorrect:false},{label:"Hahahaha",type:"Text",isCorrect:false}]}}/>);
-    case 2:
-      return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"Yes",type:"Text",isCorrect:false},{label:"No",type:"Text",isCorrect:false},{label:"What?",type:"Text",isCorrect:false},{label:"Maybe",type:"Text",isCorrect:true}]}}/>);
-    default:
-      return <div/>;
+  if(subjectIndexToShow == 1){
+    switch(step){
+      case 0:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"HDD",type:"Text",isCorrect:false},{label:"CD",type:"Text",isCorrect:false},{label:"SSD",type:"Text",isCorrect:true},{label:"Tape",type:"Text",isCorrect:false}]}}/>);
+      case 1:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"File",type:"Text",isCorrect:true},{label:"Block",type:"Text",isCorrect:false},{label:"Both",type:"Text",isCorrect:false},{label:"Neither",type:"Text",isCorrect:false}]}}/>);
+      case 2:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"File",type:"Text",isCorrect:false},{label:"Niether",type:"Text",isCorrect:false},{label:"Both?",type:"Text",isCorrect:false},{label:"Block",type:"Text",isCorrect:true}]}}/>);
+      default:
+        return <div/>;
+    }
   }
+  if(subjectIndexToShow == 2){
+    switch(step){
+      case 0:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"Not related",type:"Text",isCorrect:false},{label:"All the answers",type:"Text",isCorrect:false},{label:"First and second",type:"Text",isCorrect:false},{label:"Splitting each disk to partinions and create raid-groups",type:"Text",isCorrect:true}]}}/>);
+      case 1:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"Game Engine",type:"Text",isCorrect:false},{label:"All Correct",type:"Text",isCorrect:false},{label:"EMC Server",type:"Text",isCorrect:false},{label:"Unified Storage Array",type:"Text",isCorrect:true}]}}/>);
+      case 2:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"Not Related",type:"Text",isCorrect:false},{label:"Backup Feature",type:"Text",isCorrect:false},{label:"Sync Replication",type:"Text",isCorrect:false},{label:"Manage Hot And Cold Data",type:"Text",isCorrect:true}]}}/>);
+      default:
+        return <div/>;
+    }
+  }
+  if(subjectIndexToShow == 4){
+    switch(step){
+      case 0:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"Not Related",type:"Text",isCorrect:false},{label:"Backup Feature",type:"Text",isCorrect:false},{label:"Sync Replication",type:"Text",isCorrect:false},{label:"Writing Data From FLASH To Disk Phase",type:"Text",isCorrect:true}]}}/>);
+      case 1:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"Not Related",type:"Text",isCorrect:false},{label:"NTFS",type:"Text",isCorrect:false},{label:"EXT4",type:"Text",isCorrect:false},{label:"WAFL",type:"Text",isCorrect:true}]}}/>);
+      case 2:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"Not Related",type:"Text",isCorrect:false},{label:"CDOT",type:"Text",isCorrect:false},{label:"8.3.2",type:"Text",isCorrect:false},{label:"9.9",type:"Text",isCorrect:true}]}}/>);
+      default:
+        return <div/>;
+    }
+  }
+  if(subjectIndexToShow == 5){
+    switch(step){
+      case 0:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"3",type:"Text",isCorrect:false},{label:"4",type:"Text",isCorrect:false},{label:"5",type:"Text",isCorrect:false},{label:"2",type:"Text",isCorrect:true}]}}/>);
+      case 1:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"7",type:"Text",isCorrect:false},{label:"5",type:"Text",isCorrect:false},{label:"8",type:"Text",isCorrect:false},{label:"2",type:"Text",isCorrect:true}]}}/>);
+      case 2:
+        return (<DynamicQuiz handleSelect={handleSelect} scheme={{question:label,answers:[{label:"5",type:"Text",isCorrect:false},{label:"Many",type:"Text",isCorrect:false},{label:"3",type:"Text",isCorrect:false},{label:"7",type:"Text",isCorrect:true}]}}/>);
+      default:
+        return <div/>;
+    }
+  }
+
 }
 function Exam(props) {
-  const steps = ["What is faster?","is Mamram Gay?", "Oded Nimzha?"];  
-  const questions = [{question:steps[0],answers:[{label:"HDD",type:"Text",isCorrect:false},{label:"CD",type:"Text",isCorrect:false},{label:"SSD",type:"Text",isCorrect:true},{label:"Tape",type:"Text",isCorrect:false}]},{question:steps[1],answers:[{label:"Yes",type:"Text",isCorrect:true},{label:"No",type:"Text",isCorrect:false},{label:"Maybe",type:"Text",isCorrect:false},{label:"Hahahaha",type:"Text",isCorrect:false}]},{question:steps[2],answers:[{label:"Yes",type:"Text",isCorrect:false},{label:"No",type:"Text",isCorrect:false},{label:"What?",type:"Text",isCorrect:false},{label:"Maybe",type:"Text",isCorrect:true}]}]
-    const [activeStep, setActiveStep] = React.useState(0);
+  let subjectIndexToShow = 1
+  if(window.location.href.indexOf("2") !== -1) {
+      subjectIndexToShow = 2
+  }
+  if(window.location.href.indexOf("4") !== -1) {
+      subjectIndexToShow = 4
+  }
+  if(window.location.href.indexOf("5") !== -1) {
+    subjectIndexToShow = 5
+}
+  const steps = {1:["What is faster?","is NAS is Block Or File?", "Is SAN is Block Or File?"],2:["What is Hyper-Volume","What is unity?","What is FAST-VP?"],4:["Explain Consistency-Point","ONTAP FileSystem Name","ONTAP Latest Version"],5:["Wich layer is ARP Protocol?","Wich layer is MAC Address?","How many layers is TCP/IP?"]};  
+  const questions = [{question:steps[1][0],
+                      answers:[{label:"HDD",type:"Text",isCorrect:false},{label:"CD",type:"Text",isCorrect:false},{label:"SSD",type:"Text",isCorrect:true},{label:"Tape",type:"Text",isCorrect:false}]},
+                    {question:steps[1][1],
+                      answers:[{label:"File",type:"Text",isCorrect:true},{label:"Block",type:"Text",isCorrect:false},{label:"Both",type:"Text",isCorrect:false},{label:"Neither",type:"Text",isCorrect:false}]},
+                    {question:steps[1][2],
+                      answers:[{label:"File",type:"Text",isCorrect:false},{label:"Niether",type:"Text",isCorrect:false},{label:"Both?",type:"Text",isCorrect:false},{label:"Block",type:"Text",isCorrect:true}]},
+                      {question:steps[2][0],
+                        answers:[{label:"Not related",type:"Text",isCorrect:false},{label:"All the answers",type:"Text",isCorrect:false},{label:"First and second",type:"Text",isCorrect:false},{label:"Splitting each disk to partinions and create raid-groups",type:"Text",isCorrect:true}]},
+                        {question:steps[2][1],
+                          answers:[{label:"Game Engine",type:"Text",isCorrect:false},{label:"All Correct",type:"Text",isCorrect:false},{label:"EMC Server",type:"Text",isCorrect:false},{label:"Unified Storage Array",type:"Text",isCorrect:true}]},
+                          {question:steps[2][2],
+                            answers:[{label:"Not Related",type:"Text",isCorrect:false},{label:"Backup Feature",type:"Text",isCorrect:false},{label:"Sync Replication",type:"Text",isCorrect:false},{label:"Manage Hot And Cold Data",type:"Text",isCorrect:true}]},
+                            {question:steps[4][0],
+                              answers:[{label:"Not Related",type:"Text",isCorrect:false},{label:"Backup Feature",type:"Text",isCorrect:false},{label:"Sync Replication",type:"Text",isCorrect:false},{label:"Writing Data From FLASH To Disk Phase",type:"Text",isCorrect:true}]},
+                              {question:steps[4][1],
+                                answers:[{label:"Not Related",type:"Text",isCorrect:false},{label:"NTFS",type:"Text",isCorrect:false},{label:"EXT4",type:"Text",isCorrect:false},{label:"WAFL",type:"Text",isCorrect:true}]},
+                                {question:steps[4][2],
+                                  answers:[{label:"Not Related",type:"Text",isCorrect:false},{label:"CDOT",type:"Text",isCorrect:false},{label:"8.3.2",type:"Text",isCorrect:false},{label:"9.9",type:"Text",isCorrect:true}]},
+                                  {question:steps[5][0],
+                                    answers:[{label:"3",type:"Text",isCorrect:false},{label:"4",type:"Text",isCorrect:false},{label:"5",type:"Text",isCorrect:false},{label:"2",type:"Text",isCorrect:true}]},
+                                    {question:steps[5][1],
+                                      answers:[{label:"7",type:"Text",isCorrect:false},{label:"5",type:"Text",isCorrect:false},{label:"8",type:"Text",isCorrect:false},{label:"2",type:"Text",isCorrect:true}]},
+                                      {question:steps[5][2],
+                                        answers:[{label:"5",type:"Text",isCorrect:false},{label:"Many",type:"Text",isCorrect:false},{label:"3",type:"Text",isCorrect:false},{label:"7",type:"Text",isCorrect:true}]},
+                                    ]
+  const [activeStep, setActiveStep] = React.useState(0);
     const classes = useStyles();
     const [solution, setSolution] = React.useState(); 
     const [score, setScore] = React.useState();
@@ -77,7 +150,7 @@ function Exam(props) {
     return (
       <div className={classes.root}>
         <Paper>        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label, index) => (
+          {steps[subjectIndexToShow].map((label, index) => (
             <Step key={label}>
               <StepLabel>{"Question "+(index+1)}</StepLabel>
             </Step>
@@ -90,7 +163,7 @@ function Exam(props) {
             </div>
           ) : (
             <div>
-              <Typography className={classes.instructions}>{getFormByStep(activeStep,steps[activeStep],handleSelect)}</Typography>
+              <Typography className={classes.instructions}>{getFormByStep(activeStep,steps[subjectIndexToShow][activeStep],handleSelect,subjectIndexToShow)}</Typography>
               <div>
                 <Button
                   disabled={activeStep === 0}
