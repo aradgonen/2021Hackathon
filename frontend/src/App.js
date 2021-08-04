@@ -117,7 +117,11 @@ const App = () => {
             <div className="container mt-3">
               <Switch>
                 <Route exact path={["/", "/home"]} component={Home} />
+<<<<<<< HEAD
                 <Route exact path="/subjects" component={SubjectPage} />
+=======
+                <Route path="/subjects" component={SubjectPage} />
+>>>>>>> 24986e972e681b685cab22ff56826605b3ceb1b1
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route path="/sk" component={SolutionKnowledge} />

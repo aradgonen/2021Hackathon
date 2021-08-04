@@ -16,6 +16,8 @@ import clsx from 'clsx';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
+import { useEffect } from "react";
+
 
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
@@ -39,8 +41,6 @@ const SubjectPage = (props) => {
 
 
     //let courses = useSelector((state) => state.courses);
-
-
 
 
     // all subjects with no parents in the db
@@ -146,7 +146,15 @@ const SubjectPage = (props) => {
             }, {
                 id: "3",
                 title: "NetApp Storage",
-                children: []
+                children: [{
+                    id: "14",
+                    title: "NetApp Virtual Servers",
+                    children: []
+                },{
+                    id: "15",
+                    title: "NetApp Ontapp Management",
+                    children: []
+                }]
             }]
         },
         {
@@ -169,14 +177,14 @@ const SubjectPage = (props) => {
                 }]
             }, {
                 id: "8",
-                title: "Extra Layers",
+                title: "Routing",
                 children: [{
                     id: "9",
-                    title: "L4",
+                    title: "OSPF",
                     children: []
                 }, {
                     id: "10",
-                    title: "L5 - Benny Edition",
+                    title: "Advanced Routes",
                     children: []
                 }]
             }]
@@ -190,7 +198,7 @@ const SubjectPage = (props) => {
             },
             {
                 id: "13",
-                title: "Nothing - as usual",
+                title: "Advanced Outlook",
                 children: []
             }]
         }
@@ -291,6 +299,15 @@ const SubjectPage = (props) => {
         return courseCards
     }
 
+    let subjectIndexToShow = 1
+    if(window.location.href.indexOf("2") !== -1) {
+        subjectIndexToShow = 0
+    }
+    if(window.location.href.indexOf("4") !== -1) {
+        subjectIndexToShow = 2
+    }
+
+
     return (
         // <CoursesView courses={courses}/>
         <div>
@@ -298,9 +315,7 @@ const SubjectPage = (props) => {
                 defaultCollapseIcon={<ExpandMoreIcon />}
                 defaultExpandIcon={<ChevronRightIcon />}
                 multiSelect
-            >{subjectsToTree(subjects[1])}</TreeView>
-            <br></br>
-            <br></br>
+            >{subjectsToTree(subjects[subjectIndexToShow])}</TreeView>
             <Typography component="h2" variant="display4" gutterBottom>
                 {selectedSubject.title}
             </Typography>
