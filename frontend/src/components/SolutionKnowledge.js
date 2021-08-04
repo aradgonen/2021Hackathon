@@ -1,57 +1,118 @@
 import React, { } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from '@material-ui/core/styles';
-import DataTable from 'react-data-table-component';
-import Checkbox from 'styled-components';
-import FontIcon from 'styled-components';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import MaterialTable, { MTableToolbar } from "material-table";
 import SolutionFlow from './SolutionFlow';
-const data = [{ id: 1, issue: 'High CPU', summary: 'NetApp Node 3 High CPU', date: '01/08/2021', field: "Storage", reporter: "Arad", solutionflow: [{ title: "Connect To NetApp", data: "open PuTTY and connect" }, { title: "Find The issue", data: "while connected do magic" }, { title: "Call Zari", data: "take your phone and call" }, { title: "Blame McAfee", data: "mcaffee is the worst" }, { title: "Call Cyber", data: "blame them" }, { title: "Revert Policy", data: "do something" }, { title: "Issue is fixed", data: "Duis et massa suscipit, condimentum velit vitae, varius ligula. Aliquam a nibh eros. Donec dui magna, fringilla vitae nibh ut, pellentesque placerat neque. In diam justo, accumsan at massa vel, faucibus convallis erat. Cras suscipit metus dui, ac commodo diam feugiat et. Donec at dui quam. Duis urna justo, bibendum quis pulvinar in, molestie euismod nisl. Nam commodo sit amet eros nec ornare. Nulla facilisi. Etiam sed aliquet sem. Fusce mattis, nulla a commodo tempor, tellus lorem elementum risus, tincidunt efficitur orci dui vel lectus. Curabitur congue erat odio, eget porttitor neque cursus eget. Mauris non aliquet lacus. Aliquam erat volutpat. In sollicitudin placerat augue non fermentum. Mauris ut interdum augue, ut tempus tellus." }] }];
+
+
+const data = [{
+  id: 1,
+  issue: 'High CPU',
+  summary: 'NetApp Node 3 High CPU',
+  date: '01/08/2021',
+  subject: "Storage",
+  reporter: "Arad",
+  problem: "Hish CPU",
+  symptoms: "CPU average on 98%. For a long duration of time",
+  cause: "A specific process keeps the cpus busy",
+  solution: "Find the problamatic process and investigate it."
+},
+{
+  id: 2,
+  issue: 'Request timed out',
+  summary: 'When contacting to a server, the request times out',
+  date: '01/08/2021',
+  subject: "Network",
+  reporter: "Israel",
+  problem: "Request timed out",
+  symptoms: "There is a ping conectivity. When contacting with protocol port ",
+  cause: "The traffic is blocked by a firewall",
+  solution: "Use netfix to find the policies that blocks the traffic. And contact policy_admin team in order to open the rules"
+}];
+
+const useStyles = makeStyles((theme) => ({
+  header: {
+    paddingTop: theme.spacing(7)
+  },
+  tableHeader: {
+  },
+  action: {
+    color: theme.palette.primary.contrastText
+  }
+}));
+
 const columns = [
   {
-    name: 'Issue',
-    sortable: true,
-    cell: row => <div><div style={{ fontWeight: 700 }}>{row.title}</div>{row.summary}</div>,
+    field: "issue",
+    title: "Issue",
+    render: row => <div><div style={{ fontWeight: 700 }}>{row.title}</div>{row.summary}</div>
   },
   {
-    name: 'Field',
-    selector: 'field',
-    sortable: true,
-    right: true,
+    field: "subject",
+    title: "Subject",
+
   },
   {
-    name: 'Date',
-    selector: 'date',
-    sortable: true,
-    right: true,
+    field: "date",
+    title: "Date",
+  },
+
+  {
+    field: "reporter",
+    title: "Reporter",
   },
   {
-    name: 'Reporter',
-    selector: 'reporter',
-    sortable: true,
-    right: true,
+    field: "problem",
+    title: "problem",
+    hidden:true,
+    export:true,
   },
+  {
+    field: "symptoms",
+    title: "symptoms",
+    hidden:true,
+    export:true,
+  },
+  {
+    field: "cause",
+    title: "cause",
+    hidden:true,
+    export:true,
+  },
+  {
+    field: "solution",
+    title: "solution",
+    hidden:true,
+    export:true,  },
 ];
 
+function SolutionKnowledge(props) {
+  let currTheme = useTheme()
+  let classes = useStyles()
 
-function SolutionKnowledge() {
+  return (<MaterialTable
+    className={classes.iconsColors}
+    title="Solution knowledge"
+    columns={columns}
+    options={{
+      exportButton: true
+    }}
+    components={{
+      Toolbar: props => (
+        <div className={classes.tableHeader}>
+          <MTableToolbar {...props} className={classes.actions} />
+        </div>
 
-  const ExpandableComponent = ({ data }) => <SolutionFlow rowData={data}></SolutionFlow>;
-
-  return (
-    <DataTable
-      title="Solution Knowledge"
-      columns={columns}
-      data={data}
-      dense={false}
-      // selectableRows
-      // selectableRowsComponent={Checkbox}
-      // selectableRowsComponentProps={{ inkDisabled: true }}
-      // sortIcon={<FontIcon>arrow_downward</FontIcon>}
-      // onSelectedRowsChange={handleChange}
-      expandableRows
-      expandableRowsComponent={<ExpandableComponent />}
-    />
+      )
+    }}
+    data={data ? data : []}
+    styles={{
+      backgroundColor: currTheme.palette.primary.main
+    }}
+    detailPanel={(rowData ) => (<SolutionFlow {...rowData }></SolutionFlow>)}
+    onRowClick={(event, rowData, togglePanel) => togglePanel()}
+  />
   );
 
 }
