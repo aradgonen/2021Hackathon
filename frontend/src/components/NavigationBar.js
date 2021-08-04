@@ -87,11 +87,11 @@ const NavigationBar = (props) => {
                     activeClassName={classes.activeLink}>
                     Solution knowledge
                 </NavLink>
-                <NavLink to="/exam"
+                {/* <NavLink to="/exam"
                     className={classes.link}
                     activeClassName={classes.activeLink}>
                     Exam
-                </NavLink>
+                </NavLink> */}
                 <NavLink to="/create/solution"
                     className={classes.link}
                     activeClassName={classes.activeLink}>
