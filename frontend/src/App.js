@@ -43,6 +43,7 @@ import pinkTheme from './utils/ui/themes/PinkTheme';
 import staticTheme from './utils/ui/themes/StaticTheme'
 import { light } from "@material-ui/core/styles/createPalette";
 import { pink } from "@material-ui/core/colors";
+import CoursesView from "./components/courses_view";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -121,6 +122,7 @@ const App = () => {
                 <Route path="/sk" component={SolutionKnowledge} />
                 <Route path="/exam" component={Exam} />
                 <Route path="/create/solution" component={CreateSolution} />
+                <Route path="/course/detail" component={CoursesView}/>
               </Switch>
             </div>
           </div>
