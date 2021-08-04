@@ -8,18 +8,20 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.forms.models import model_to_dict
 
-from .models import Subject
-from .serializers import SubjectSerializer
-
-
-def get_tree(category):
-    tree = model_to_dict(category, fields=['category_name', 'status', 'id'])
-    if category.children.all().exists():
-        children = list()
-        for child in category.children.all():
-            children.append(get_tree(child))
-        tree['children'] = children
-    return tree
+from .models import (
+    Subject,
+    Material,
+    Question,
+    SolutionKnowledge,
+    Exam,
+    Answer,
+)
+from .serializers import (
+    SubjectSerializer,
+    SolutionKnowledgeSerializer,
+    UserSerializer,
+    ExamSerializer
+)
 
 
 class SubjectViewSet(viewsets.ModelViewSet):
@@ -72,11 +74,45 @@ class SubjectViewSet(viewsets.ModelViewSet):
         return Response(subject_hierarchy)
 
 
-class ExampleView(APIView):
-    permission_classes = [IsAuthenticated, ]
+class SolutionKnowledgeView(viewsets.ModelViewSet):
+    queryset = SolutionKnowledge.objects.all()
+    serializer_class = SolutionKnowledgeSerializer
 
-    def get(self, request, format=None):
-        content = {
-            'status': 'request was permitted'
-        }
-        return Response(content)
+    def create(self, request, *args, **kwargs):
+        serializer = SolutionKnowledgeSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.subject = SubjectSerializer(1)
+            serializer.user = UserSerializer()
+            serializer.save()
+            return Response({'data': serializer.data})
+        else:
+            return Response({'data': serializer.errors})
+
+
+class ExamView(viewsets.ModelViewSet):
+    queryset = Exam.objects.all()
+    serializer_class = ExamSerializer
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        exam = Exam(title=data["title"])
+        exam.save()
+
+        for question in data["questions"]:
+            q = Question(question=question["question"])
+            q.exam = exam
+            q.save()
+
+            for answer in question["answers"]:
+                a = Answer(answer=answer)
+                a.question = q
+
+                if question["right_answer"] == answer:
+                    q.right_answer = a
+
+                a.save()
+
+            q.save()
+        exam.save()
+        return Response({'status': "ok"})
