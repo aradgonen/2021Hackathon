@@ -16,6 +16,8 @@ import clsx from 'clsx';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
+import { useEffect } from "react";
+
 
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
@@ -39,8 +41,6 @@ const SubjectPage = (props) => {
 
 
     //let courses = useSelector((state) => state.courses);
-
-
 
 
     // all subjects with no parents in the db
@@ -291,6 +291,12 @@ const SubjectPage = (props) => {
         return courseCards
     }
 
+    let subjectIndexToShow = 1
+    if(window.location.href.indexOf("2") !== -1) {
+        subjectIndexToShow = 0
+    }
+
+
     return (
         // <CoursesView courses={courses}/>
         <div>
@@ -298,7 +304,7 @@ const SubjectPage = (props) => {
                 defaultCollapseIcon={<ExpandMoreIcon />}
                 defaultExpandIcon={<ChevronRightIcon />}
                 multiSelect
-            >{subjectsToTree(subjects[1])}</TreeView>
+            >{subjectsToTree(subjects[subjectIndexToShow])}</TreeView>
             <Typography component="h2" variant="display4" gutterBottom>
                 {selectedSubject.title}
             </Typography>

@@ -37,39 +37,45 @@ const Home = (props) => {
     {
       title: "Basic Storage",
       subject: "BasicStorage",
-      own_group: "Storage"
+      own_group: "Storage",
+      coursePath:"/"
     },
     {
       title: "EMC Storage Solutions",
       subject: "EMC",
-      own_group: "Storage"
+      own_group: "Storage",
+      coursePath:"/"
     },
     {
       title: "NetApp Storage Solutions",
       subject: "NetApp",
-      own_group: "Storage"
+      own_group: "Storage",
+      coursePath:"/"
     },
     {
       title: "Basic Networking",
       subject: "BasicNetworking",
-      own_group: "Network"
+      own_group: "Network",
+      coursePath:"/"
     }
   ]
-
 
 
   // all subjects with no parents in the db
   const parentSubjects = [
     {
       title: "storage",
-      child_subject: ["Basic Storage", "EMC Storage", "NetApp Storage"]
+      child_subject: ["Basic Storage", "EMC Storage", "NetApp Storage"],
+      subjectPath:"/subjects/2"
     },
     {
       title: "Network",
-      child_subject: ["Basic Network", "L2", "L3", "L4", "L5 - Benny edition"]
+      child_subject: ["Basic Network", "L2", "L3", "L4", "L5 - Benny edition"],
+      subjectPath:"/subjects/1"
     }, {
       title: "Excahnge",
-      child_subject: ["Basic Exchange", "Nothing - as usual"]
+      child_subject: ["Basic Exchange", "Nothing - as usual"],
+      subjectPath:"/subjects/3"
     }
   ]
   //let searchTerm = useSelector((state) => state.search);
@@ -123,7 +129,7 @@ const Home = (props) => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to="/home">
+              <Link to={subject.subjectPath}>
                 <Button size="small">Go To Subjects</Button>
               </Link>
             </CardActions>
