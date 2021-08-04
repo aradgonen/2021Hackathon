@@ -67,24 +67,29 @@ const columns = [
     title: "problem",
     hidden:true,
     export:true,
+    searchable:true,
   },
   {
     field: "symptoms",
     title: "symptoms",
     hidden:true,
     export:true,
+    searchable:true,
   },
   {
     field: "cause",
     title: "cause",
     hidden:true,
     export:true,
+    searchable:true,
   },
   {
     field: "solution",
     title: "solution",
     hidden:true,
-    export:true,  },
+    export:true, 
+    searchable:true,
+   },
 ];
 
 function SolutionKnowledge(props) {
