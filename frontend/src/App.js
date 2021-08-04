@@ -8,8 +8,9 @@ import {
 } from '@material-ui/styles'
 
 import {
-  createMuiTheme
+  createMuiTheme,
 } from '@material-ui/core/styles'
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -122,6 +123,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <ModalProvider>
+      <CssBaseline />
         <BrowserRouter>
           <div>
             <NavigationBar onThemeChange= {updateTheme} currTheme={currThemeType}/>

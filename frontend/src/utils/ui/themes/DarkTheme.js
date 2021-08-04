@@ -52,24 +52,5 @@ const darkTheme = {
 
 }
 
-// Theme for the mui data picker (date/time module)
-const datePickerDarkTheme = {
-    overrides: {
-        MuiPickersToolbar: {
-            toolbar: {
-                backgroundColor: darkTheme.palette.primary.main,
-            },
-        },
-        MuiPickersCalendarHeader: {
-            switchHeader: {
-                backgroundColor: darkTheme.palette.primary.main,
-                color: darkTheme.palette.primary.contrastText,
-            },
-            iconButton: {
-                backgroundColor: darkTheme.palette.primary.light,
-            }
-        },
-    },
-}
 
-export default mergeJsons(darkTheme, datePickerDarkTheme)
+export default darkTheme
