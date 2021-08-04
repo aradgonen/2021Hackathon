@@ -9,24 +9,50 @@ import FontAwesomeIcon from 'react-fontawesome';
 import {useHistory} from "react-router-dom";
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Read this file', 'Read this file, and do the Lab', 'Get Ready for test'];
 }
 
-function getStepContent(step) {
+function getStepContent(step,subjectIndexToShow) {
   switch (step) {
     case 0:
-      return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
+      if(subjectIndexToShow == 1){
+        return "Basic Storage - First Step"
+      }
+      if(subjectIndexToShow == 2){
+        return "EMC - First Step"
+      }
+      if(subjectIndexToShow == 4){
+        return "NetApp - First Step"
+      }
+      if(subjectIndexToShow == 5){
+        return "Network - First Step"
+      }
     case 1:
-      return 'An ad group contains one or more ads which target a shared set of keywords.';
+      if(subjectIndexToShow == 1){
+        return "Basic Storage - Second Step"
+      }
+      if(subjectIndexToShow == 2){
+        return "EMC - Second Step"
+      }
+      if(subjectIndexToShow == 4){
+        return "NetApp - Second Step"
+      }
+      if(subjectIndexToShow == 5){
+        return "Network - Second Step"
+      }
     case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
-    default:
-      return 'Unknown step';
+          if(subjectIndexToShow == 1){
+            return "Basic Storage - Third Step"
+          }
+          if(subjectIndexToShow == 2){
+            return "EMC - Third Step"
+          }
+          if(subjectIndexToShow == 4){
+            return "NetApp - Third Step"
+          }
+          if(subjectIndexToShow == 5){
+            return "Network - Third Step"
+          }
   }
 }
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +76,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function DetailedCourseCard() {
+  let subjectIndexToShow = 1
+  if(window.location.href.indexOf("2") !== -1) {
+      subjectIndexToShow = 2
+  }
+  if(window.location.href.indexOf("4") !== -1) {
+      subjectIndexToShow = 4
+  }
+  if(window.location.href.indexOf("5") !== -1) {
+    subjectIndexToShow = 5
+}
   let _history = useHistory()
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -66,13 +102,13 @@ function DetailedCourseCard() {
   const handleReset = () => {
     setActiveStep(0);
   };
-
+  const courses = {1:"Basic Storage",2:"EMC Storage Solutions",4:"NetApp Storage Solutions",5:"Basic Networking"}
   return (
     <div className={classes.root}>
       <Card>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>Learn Storage</Paper>
+          <Paper className={classes.paper}>{courses[subjectIndexToShow]}</Paper>
         </Grid>
         <Grid item xs={12}>
 {/* The Steps */}
@@ -83,7 +119,7 @@ function DetailedCourseCard() {
             <StepContent>
             <Grid container spacing={3}>
               <Grid item xs={6}> 
-              <Typography>{getStepContent(index)}</Typography>
+              <Typography>{getStepContent(index,subjectIndexToShow)}</Typography>
               <div className={classes.actionsContainer}>
                 <div>
                   <Button
@@ -107,7 +143,7 @@ function DetailedCourseCard() {
               <Grid item xs={6}>
                 <Grid container spacing={3}>
                   <Grid item zeroMinWidth>
-                    <Typography>{label + " Materials"}</Typography>
+                    <Typography>{label}</Typography>
                   </Grid>
                   <Grid container zeroMinWidth >
                     {/* List the course files for this step */}
@@ -125,8 +161,8 @@ function DetailedCourseCard() {
       {activeStep === steps.length && (
         <Paper square elevation={0} className={classes.resetContainer}>
           <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} className={classes.button}>
-            Reset
+          <Button onClick={()=>handleExamClick(subjectIndexToShow)} className={classes.button}>
+            Go To Test
           </Button>
         </Paper>
       )}
@@ -137,6 +173,9 @@ function DetailedCourseCard() {
   );
   function handleFileClick(file_id) {
     _history.push(`/files/${file_id}`);
+  }
+    function handleExamClick(exam_id) {
+    _history.push(`/exam/${exam_id}`);
   }
 }
   export default DetailedCourseCard;
