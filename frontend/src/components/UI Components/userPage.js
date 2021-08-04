@@ -42,7 +42,7 @@ function CoursesDisplay(props) {
         data: {
             labels: ['Complete', 'Remaining'],
             datasets: [{
-                data: [100, 100],
+                data: [80, 20],
                 backgroundColor: ['green', 'red'],
             }]
         },
@@ -63,7 +63,28 @@ function CoursesDisplay(props) {
     const cardClasses = cardUseStyles();
 
     const coursesElements = []
-    const courses = ["1", '2', '3', '4']
+    const courses = [
+        {
+            name: "SH Basic",
+            subject: "storage",
+            id: 1
+
+        }, 
+        {
+            name: "Network",
+            subject: "Network",
+            id: 2
+        },
+        {
+            name: 'Linux Fundumentals',
+            subject: "OS",
+            id: 3
+        }, 
+        {
+            name: 'AD General',
+            subject: "AD",
+            id: 4
+        }]
 
     for (const course of courses) {
         coursesElements.push(
@@ -73,14 +94,14 @@ function CoursesDisplay(props) {
                         <CardActionArea>
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2" align='center'>
-                                    Lizard {course}
+                                    {course.name}
                                 </Typography>
                                 <Doughnut data={chartConfiguration.data} oprions={chartConfiguration.options} width={1} />
                             </CardContent>
                         </CardActionArea>
                         <CardActions>
                             <div>Next Lesson: </div>
-                            <Link to="/home">
+                            <Link to="/course/detail/{course.id}">
                                 <Button size="small" color="primary">
                                     Learn More
                                 </Button>
