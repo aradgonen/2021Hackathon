@@ -15,6 +15,18 @@ const lightTheme = {
             }
 
         },
+        primary: {
+            light: "#2D747A",
+            main: "#F4F6F8",
+            dark: "#0B3359",
+            contrastText: "#FFF"
+        },
+        secondary: {
+            light: "#92607A",
+            main: "#80485B",
+            dark: "#5E2C3B",
+            contrastText: "#FFF"
+        },
         action: {
             disabledBackground: "rgba(250, 250, 250, 0.7)",
         }

@@ -119,7 +119,7 @@ function CoursesDisplay(props) {
     return (
         <div className={gridClasses.root}>
             <Typography variant="h3" component="h2" gutterBottom align='center'>
-                Current Cources
+                Current Courses 
             </Typography>
             <Grid container spacing={3}>
                 {coursesElements}
