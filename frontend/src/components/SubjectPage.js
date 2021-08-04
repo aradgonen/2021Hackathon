@@ -253,9 +253,9 @@ const SubjectPage = (props) => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Link to={material.file_path}>
-                                <Button size="small">Go To Material</Button>
-                            </Link>
+                            <dev to={material.file_path}>
+                                <a href="file:///C:\Users\Laptop\Desktop\Hakaton /Project\2021Hackathon\frontend\src\Files\Test.txt" download>Go To Material</a>
+                            </dev>
                         </CardActions>
                     </Card>
                 </Grid>

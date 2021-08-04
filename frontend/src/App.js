@@ -124,6 +124,7 @@ const App = () => {
                 <Route path="/exam" component={Exam} />
                 <Route path="/create/solution" component={CreateSolution} />
                 <Route path="/course/detail" component={CoursesView}/>
+                <Route path="/personal" component={UserPersonalPage}/>
               </Switch>
             </div>
           </div>
