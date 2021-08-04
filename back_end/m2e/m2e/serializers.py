@@ -8,7 +8,9 @@ from .models import (
     Question,
     Exam,
     Course,
-    Material
+    Material,
+    Progress,
+    Step
 )
 
 
@@ -57,3 +59,37 @@ class ExamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exam
         fields = ["id", "questions", "title"]
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    subject = SubjectSerializer(many=False, read_only=True)
+    # own_group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='courses', null=True, blank=True)
+
+    class Meta:
+        model = Progress
+        fields = ["id", "title", ""]
+
+class MaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Progress
+        fields = ["id", "title", "file_path", "description"]
+
+
+class StepSerializer(serializers.ModelSerializer):
+    materials = MaterialSerializer(many=True, read_only=True)
+    materials_ids = serializers.PrimaryKeyRelatedField(source="materials", queryset=Material.objects.all(), write_only=True)
+
+    class Meta:
+        model = Progress
+        fields = ["id", "title", "description", "index", "materials", "materials_ids"]
+
+class ProgressSerializer(serializers.ModelSerializer):
+    course = SubjectSerializer(many=False, read_only=True)
+    course_id = serializers.PrimaryKeyRelatedField(source="subject", queryset=Subject.objects.all(), write_only=True)
+    user = UserSerializer(many=False, read_only=True)
+    user_id = serializers.PrimaryKeyRelatedField(source="user", queryset=User.objects.all(), write_only=True)
+
+    class Meta:
+        model = Progress
+        fields = ["id", "is_finished", "started_date", "finished_date", "course", "course_id", "user", "current_step",
+                  "date"]
