@@ -22,7 +22,7 @@ class SolutionKnowledge(models.Model):
     cause = models.CharField(max_length=50000)
     solution = models.CharField(max_length=50000)
     date = models.DateTimeField(default=datetime.now())
-    user = models.ForeignKey(User,  related_name='sks', on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, related_name='sks', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -53,7 +53,7 @@ class Material(models.Model):
     title = models.CharField(max_length=50)
     file_path = models.CharField(max_length=250)
     description = models.CharField(max_length=5000)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='materials', null=True, blank=True) #
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='materials', null=True, blank=True)  #
 
     def __str__(self):
         return self.title
@@ -65,6 +65,9 @@ class Step(models.Model):
     index = models.IntegerField()
     materials = models.ManyToManyField(Material, related_name='Steps')
     course = models.ForeignKey(Course, related_name='Steps', null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ["index"]
 
     def __str__(self):
         return self.title
@@ -80,7 +83,7 @@ class Exam(models.Model):
 
 class Question(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE, related_name='questions')
-    right_answer = models.OneToOneField('Answer', on_delete=models.CASCADE, related_name="q",  null=True, blank=True)
+    right_answer = models.OneToOneField('Answer', on_delete=models.CASCADE, related_name="q", null=True, blank=True)
     question = models.CharField(max_length=5000)
 
     # answer = models.ForeignKey(Answer, on_delete=models.CASCADE())

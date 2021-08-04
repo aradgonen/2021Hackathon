@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 from rest_framework.permissions import (
     IsAuthenticated,
     BasePermission
@@ -116,3 +117,8 @@ class ExamView(viewsets.ModelViewSet):
             q.save()
         exam.save()
         return Response({'status': "ok"})
+
+
+@api_view(['GET'])
+def get_materials_by_subject(request):
+    pass
