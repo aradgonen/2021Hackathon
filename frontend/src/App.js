@@ -18,10 +18,7 @@ import "./App.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
-import Profile from "./components/Profile";
-import BoardUser from "./components/BoardUser";
-import BoardModerator from "./components/BoardModerator";
-import BoardAdmin from "./components/BoardAdmin";
+
 import SubjectPage from "./components/SubjectPage";
 import SolutionKnowledge from "./components/SolutionKnowledge";
 
@@ -30,11 +27,8 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { setCourses } from "./actions/courses";
 import { setSks } from "./actions/sk"
-import { setSearchTerm } from "./actions/search";
 import { setSubjects } from "./actions/subject";
 import { history } from "./helpers/history";
-import DetailedRackCard from './components/detailed_course_card'
-import AddDevicesToRack from './components/AddDevicesToRack'
 import { Subject } from "@material-ui/icons";
 import Exam from "./components/Exam";
 import CreateSolution from "./components/CreateSolution";
@@ -50,11 +44,8 @@ import CoursesView from "./components/courses_view";
 import { setSk } from "./actions/sk";
 
 const App = () => {
-  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-  const [showAdminBoard, setShowAdminBoard] = useState(false);
-  const [currThemeType, updateTheme] = useState("dark")
 
-  const { user: currentUser } = useSelector((state) => state.auth);
+  const [currThemeType, updateTheme] = useState("dark")
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,12 +54,7 @@ const App = () => {
     });
   }, [dispatch]);
 
-  useEffect(() => {
-    if (currentUser) {
-      setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
-    }
-  }, [currentUser]);
+
 
   useEffect(() => {
     DataService.getCourses().then(
@@ -132,10 +118,6 @@ const App = () => {
                 <Route exact path={["/", "/home"]} component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
-                <Route exact path="/profile" component={Profile} />
-                <Route path="/user" component={BoardUser} />
-                <Route path="/mod" component={BoardModerator} />
-                <Route path="/admin" component={BoardAdmin} />
                 <Route path="/sk" component={SolutionKnowledge} />
                 <Route path="/exam" component={Exam} />
                 <Route path="/create/solution" component={CreateSolution} />
