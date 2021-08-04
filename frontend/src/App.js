@@ -42,6 +42,7 @@ import { light } from "@material-ui/core/styles/createPalette";
 import { pink } from "@material-ui/core/colors";
 import CoursesView from "./components/courses_view";
 import { setSk } from "./actions/sk";
+import UserPersonalPage from "./components/UI Components/userPage";
 
 const App = () => {
 
@@ -123,6 +124,7 @@ const App = () => {
                 <Route path="/exam" component={Exam} />
                 <Route path="/create/solution" component={CreateSolution} />
                 <Route path="/course/detail" component={CoursesView}/>
+                <Route path="/personal" component={UserPersonalPage}/>
               </Switch>
             </div>
           </div>

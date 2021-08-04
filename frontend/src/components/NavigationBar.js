@@ -102,6 +102,11 @@ const NavigationBar = (props) => {
                     activeClassName={classes.activeLink}>
                     Course Detail
                 </NavLink> */}
+                                <NavLink to="/personal"
+                    className={classes.link}
+                    activeClassName={classes.activeLink}>
+                    Personal
+                </NavLink>
                 <div className={classes.mavbarFooter}>
                     <FormControl className={classes.formControl}>
                         <Select
