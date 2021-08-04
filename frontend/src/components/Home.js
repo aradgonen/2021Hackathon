@@ -70,12 +70,12 @@ const Home = (props) => {
     },
     {
       title: "Network",
-      child_subject: ["Basic Network", "L2", "L3", "L4", "L5 - Benny edition"],
+      child_subject: ["Basic Network", "L2", "L3", "OSPF", "Routing"],
       subjectPath:"/subjects/1"
     }, {
       title: "Excahnge",
-      child_subject: ["Basic Exchange", "Nothing - as usual"],
-      subjectPath:"/subjects/3"
+      child_subject: ["Basic Exchange", "Advanced Outlook"],
+      subjectPath:"/subjects/4"
     }
   ]
   //let searchTerm = useSelector((state) => state.search);

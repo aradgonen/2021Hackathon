@@ -146,7 +146,15 @@ const SubjectPage = (props) => {
             }, {
                 id: "3",
                 title: "NetApp Storage",
-                children: []
+                children: [{
+                    id: "14",
+                    title: "NetApp Virtual Servers",
+                    children: []
+                },{
+                    id: "15",
+                    title: "NetApp Ontapp Management",
+                    children: []
+                }]
             }]
         },
         {
@@ -169,14 +177,14 @@ const SubjectPage = (props) => {
                 }]
             }, {
                 id: "8",
-                title: "Extra Layers",
+                title: "Routing",
                 children: [{
                     id: "9",
-                    title: "L4",
+                    title: "OSPF",
                     children: []
                 }, {
                     id: "10",
-                    title: "L5 - Benny Edition",
+                    title: "Advanced Routes",
                     children: []
                 }]
             }]
@@ -190,7 +198,7 @@ const SubjectPage = (props) => {
             },
             {
                 id: "13",
-                title: "Nothing - as usual",
+                title: "Advanced Outlook",
                 children: []
             }]
         }
@@ -294,6 +302,9 @@ const SubjectPage = (props) => {
     let subjectIndexToShow = 1
     if(window.location.href.indexOf("2") !== -1) {
         subjectIndexToShow = 0
+    }
+    if(window.location.href.indexOf("4") !== -1) {
+        subjectIndexToShow = 2
     }
 
 
