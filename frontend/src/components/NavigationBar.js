@@ -61,7 +61,7 @@ const NavigationBar = (props) => {
     const classes = useStyles();
    
     return <div>
-        <AppBar position="sticky" color="default" >
+        <AppBar position="sticky" >
             <Toolbar className={classes.root}>
                 <NavLink to="/"
                     className={classes.link}>
