@@ -72,16 +72,16 @@ const NavigationBar = (props) => {
                     activeClassName={classes.activeLink}>
                     Home
                 </NavLink>
-                <NavLink to="/subjects"
+                {/* <NavLink to="/subjects"
                     className={classes.link}
                     activeClassName={classes.activeLink}>
                     Subjects
-                </NavLink>
-                <NavLink to="/courses"
+                </NavLink> */}
+                {/* <NavLink to="/courses"
                     className={classes.link}
                     activeClassName={classes.activeLink}>
                     Courses
-                </NavLink>
+                </NavLink> */}
                 <NavLink to="/sk"
                     className={classes.link}
                     activeClassName={classes.activeLink}>
@@ -118,7 +118,7 @@ const NavigationBar = (props) => {
                             <MenuItem value={"pink"}>Pink Mode</MenuItem>
                         </Select>
                     </FormControl>
-                    <NavLink to="/login"
+                    {/* <NavLink to="/login"
                     className={classes.link}
                     activeClassName={classes.activeLink}>
                     Login
@@ -127,7 +127,7 @@ const NavigationBar = (props) => {
                     className={classes.link}
                     activeClassName={classes.activeLink}>
                     Logout
-                </NavLink>
+                </NavLink> */}
                 </div>
             </Toolbar>
         </AppBar>
