@@ -13,7 +13,7 @@ import {
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import "font-awesome/css/font-awesome.min.css";
+//import "font-awesome/css/font-awesome.min.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
@@ -21,6 +21,7 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
+import SubjectPage from "./components/SubjectPage";
 import SolutionKnowledge from "./components/SolutionKnowledge";
 
 import DataService from "./services/data.service";
@@ -31,6 +32,7 @@ import { setSearchTerm } from "./actions/search";
 import { history } from "./helpers/history";
 import DetailedRackCard from './components/detailed_course_card'
 import AddDevicesToRack from './components/AddDevicesToRack'
+import { Subject } from "@material-ui/icons";
 import Exam from "./components/Exam";
 import CreateSolution from "./components/CreateSolution";
 
@@ -41,6 +43,7 @@ import pinkTheme from './utils/ui/themes/PinkTheme';
 import staticTheme from './utils/ui/themes/StaticTheme'
 import { light } from "@material-ui/core/styles/createPalette";
 import { pink } from "@material-ui/core/colors";
+import CoursesView from "./components/courses_view";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -119,6 +122,7 @@ const App = () => {
                 <Route path="/sk" component={SolutionKnowledge} />
                 <Route path="/exam" component={Exam} />
                 <Route path="/create/solution" component={CreateSolution} />
+                <Route path="/course/detail" component={CoursesView}/>
               </Switch>
             </div>
           </div>
